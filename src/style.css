@@ -1,0 +1,453 @@
+/* ==========================================================================
+   Brandon's Care — design tokens
+   Palette: deep spruce shell, warm ivory content, marigold action accent,
+   muted rust reserved only for low-stock / attention states.
+   Type: Fraunces (display, warm/humanist) + Inter (UI/body) + IBM Plex Mono (data/time)
+   ========================================================================== */
+
+:root {
+  --spruce-950: #0F211D;
+  --spruce-900: #16302B;
+  --spruce-800: #1F3A34;
+  --spruce-700: #2C4C44;
+  --spruce-600: #3E655B;
+
+  --ivory: #FAF7F0;
+  --sand: #F1ECE0;
+  --sand-line: #E2DBC9;
+
+  --marigold: #D9A441;
+  --marigold-dark: #B9852A;
+  --rust: #B5533C;
+  --rust-bg: #F7E6E0;
+  --sage: #6E8C74;
+  --sage-bg: #E8EEE5;
+
+  --ink: #1D2420;
+  --ink-soft: #4B5650;
+  --ink-faint: #7C8A83;
+
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 1px 2px rgba(15, 33, 29, 0.06), 0 4px 16px rgba(15, 33, 29, 0.05);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--sand);
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+#app { min-height: 100vh; }
+
+a { color: inherit; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--marigold-dark);
+  outline-offset: 2px;
+}
+
+/* ---------- App shell ---------- */
+
+.shell {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 860px) {
+  .shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .sidebar.open { display: flex; }
+}
+
+.sidebar {
+  background: var(--spruce-900);
+  color: var(--ivory);
+  display: flex;
+  flex-direction: column;
+  padding: 22px 16px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ivory);
+  text-decoration: none;
+  padding: 0 8px 18px;
+  letter-spacing: 0.01em;
+}
+
+.sidebar-brand span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--marigold);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 2px;
+}
+
+.nav-group { margin-top: 14px; }
+
+.nav-group-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(250, 247, 240, 0.45);
+  padding: 0 10px;
+  margin-bottom: 6px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: rgba(250, 247, 240, 0.82);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 1px;
+}
+
+.nav-link:hover { background: rgba(250, 247, 240, 0.07); }
+
+.nav-link.active {
+  background: var(--spruce-700);
+  color: var(--ivory);
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(250, 247, 240, 0.12);
+}
+
+.signout-btn {
+  background: none;
+  border: none;
+  color: rgba(250, 247, 240, 0.6);
+  font-size: 13px;
+  padding: 8px 10px;
+  width: 100%;
+  text-align: left;
+  border-radius: 8px;
+}
+.signout-btn:hover { background: rgba(250, 247, 240, 0.07); color: var(--ivory); }
+
+/* ---------- Main ---------- */
+
+.main {
+  padding: 28px 32px 60px;
+  max-width: 1080px;
+  width: 100%;
+}
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: var(--spruce-900);
+  color: var(--ivory);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+@media (max-width: 860px) {
+  .mobile-menu-btn { display: inline-block; }
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.page-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+
+/* ---------- Rhythm strip (dashboard signature element) ---------- */
+
+.rhythm-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 18px 0 28px;
+}
+
+.rhythm-block {
+  background: var(--ivory);
+  border: 1px solid var(--sand-line);
+  border-radius: var(--radius);
+  padding: 14px 14px 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.rhythm-block .slot-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+
+.rhythm-dot-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.rhythm-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--sand-line);
+}
+.rhythm-dot.done { background: var(--sage); }
+.rhythm-dot.due { background: var(--marigold); }
+
+.rhythm-block .slot-note {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 8px;
+}
+
+/* ---------- Cards / grid ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.tile {
+  background: var(--ivory);
+  border: 1px solid var(--sand-line);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-decoration: none;
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  display: block;
+}
+.tile:hover { border-color: var(--marigold); }
+
+.tile-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sage);
+  margin-bottom: 6px;
+}
+
+.tile-title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  margin: 30px 0 12px;
+}
+
+/* ---------- Forms ---------- */
+
+.panel {
+  background: var(--ivory);
+  border: 1px solid var(--sand-line);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.field { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 140px; }
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.field input, .field select, .field textarea {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 9px 11px;
+  border: 1px solid var(--sand-line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+}
+.field textarea { min-height: 70px; resize: vertical; }
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--marigold-dark);
+  outline: none;
+}
+
+.btn {
+  background: var(--marigold);
+  color: var(--spruce-950);
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--marigold-dark); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--sand-line);
+  color: var(--ink-soft);
+  font-size: 13px;
+  padding: 7px 12px;
+  border-radius: 8px;
+}
+.btn-ghost:hover { border-color: var(--ink-faint); }
+
+.btn-danger {
+  background: transparent;
+  border: none;
+  color: var(--rust);
+  font-size: 12px;
+  padding: 4px 6px;
+}
+
+/* ---------- Table / log list ---------- */
+
+.log-table { width: 100%; border-collapse: collapse; }
+.log-table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  font-weight: 600;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--sand-line);
+}
+.log-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--sand-line);
+  font-size: 14px;
+  vertical-align: top;
+}
+.log-table tr:last-child td { border-bottom: none; }
+.log-table .ts { font-family: var(--font-mono); font-size: 12.5px; color: var(--ink-faint); white-space: nowrap; }
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.badge.low { background: var(--rust-bg); color: var(--rust); }
+.badge.ok { background: var(--sage-bg); color: var(--sage); }
+
+.empty-state {
+  color: var(--ink-faint);
+  font-size: 14px;
+  padding: 20px 4px;
+}
+
+/* ---------- Prose / guide pages ---------- */
+
+.prose { font-size: 15px; line-height: 1.65; color: var(--ink-soft); max-width: 68ch; }
+.prose h3 { font-family: var(--font-display); color: var(--ink); margin-top: 24px; }
+.prose-placeholder {
+  border: 1px dashed var(--sand-line);
+  border-radius: var(--radius);
+  padding: 16px;
+  color: var(--ink-faint);
+  font-size: 13.5px;
+  background: rgba(255,255,255,0.4);
+}
+
+/* ---------- Auth screen ---------- */
+
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--spruce-900);
+  padding: 20px;
+}
+
+.auth-card {
+  background: var(--ivory);
+  border-radius: var(--radius-lg);
+  padding: 32px 30px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.auth-card h1 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  margin: 0 0 4px;
+}
+.auth-card p.sub { color: var(--ink-faint); font-size: 13.5px; margin: 0 0 20px; }
+.auth-card .field { margin-bottom: 14px; }
+.auth-card .btn { width: 100%; padding: 11px; }
+.auth-error { color: var(--rust); font-size: 13px; margin-top: 10px; }
+.auth-toggle { text-align: center; margin-top: 16px; font-size: 13px; color: var(--ink-faint); }
+.auth-toggle button { background: none; border: none; color: var(--marigold-dark); font-weight: 600; font-size: 13px; padding: 0; }
+
+.config-warning {
+  max-width: 480px;
+  background: var(--rust-bg);
+  color: var(--rust);
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
